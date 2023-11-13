@@ -15,7 +15,7 @@ class TestPostEndpoint(BaseApiTest):
         assert_that(len(posts)).is_greater_than(20)
 
     def test_get_posts_list_failed_status_code(self):
-        posts = PlaceholderService().post().get_posts(status_code=HttpStatus.BAD_REQUEST.code)
+        PlaceholderService().post().get_posts(status_code=HttpStatus.BAD_REQUEST.code)
 
     def test_get_post_by_id(self):
         hardcoded_post_id = 1
