@@ -1,0 +1,5 @@
+---
+PlaceholderService:
+  ApiUrl: https://jsonplaceholder.typicode.com
+  ApiPort: 443
+  ApiBasePath: 'public'
