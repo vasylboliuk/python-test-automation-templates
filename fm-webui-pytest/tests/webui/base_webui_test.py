@@ -1,4 +1,0 @@
-
-
-class BaseWebUiTest:
-    pass
