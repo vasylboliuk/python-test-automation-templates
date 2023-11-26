@@ -24,19 +24,17 @@ class EnvLoader(metaclass=EnvironmentSingleton):
     def __init__(self, env='qa'):
         self.env = env
         print(f"\nAutomation Tests started on Environment: [{self.env.upper()}]")
-        self._config = self.__load_config_yaml("environment.yaml")
+        self._web_ui_config = self.__load_config_yaml("webui_config.yaml")
 
     def __load_config_yaml(self, config_file):
         config_path = os.path.join(CommonPaths.environment_path, self.env, config_file)
         return FileUtil.read_yaml_file(config_path)
 
     def get_config(self):
-        return self._config
+        return self._web_ui_config
 
-    def get_webui_config_value(self, key) -> WebUiConfigDto:
-        config_data = self._config
-        service_config = config_data[key]
-        return WebUiConfigDto.from_dict(service_config)
+    def get_webui_config_value(self) -> WebUiConfigDto:
+        return WebUiConfigDto.from_dict(self._web_ui_config)
 
     def get_env(self):
         return self.env
