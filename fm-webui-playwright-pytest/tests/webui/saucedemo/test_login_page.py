@@ -1,5 +1,4 @@
 from core.webui.pages.LoginPage import LoginPage
-from core.webui.webexecutor.browser_factory import BrowserFactory
 from tests.webui.base_webui_test import BaseWebUiTest
 
 
