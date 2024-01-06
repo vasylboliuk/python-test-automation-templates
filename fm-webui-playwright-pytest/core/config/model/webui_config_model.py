@@ -7,6 +7,7 @@ from dataclasses_json import dataclass_json, config
 class WebDriverConfigDto:
     default_implicit_wait: int = field(metadata=config(field_name="DefaultImplicitWait"))
     default_explicit_wait: int = field(metadata=config(field_name="DefaultExplicitWait"))
+    headless_mode: bool = field(metadata=config(field_name="HeadlessMode"))
     window_size: str = field(metadata=config(field_name="WindowSize"))
 
 

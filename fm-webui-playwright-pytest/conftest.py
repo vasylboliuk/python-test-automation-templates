@@ -1,5 +1,5 @@
 from core.config.common_paths import CommonPaths
-from core.utils.environment_loader import EnvLoader
+from core.utils.web_ui_config_loader import WebUiConfigLoader
 
 
 def pytest_runtest_setup(item):
@@ -17,4 +17,4 @@ def pytest_configure(config):
     envs = CommonPaths().list_environment_names()
     if env is not None and env not in envs:
         raise ValueError(f"Environment name is not valid. Please choose from: {envs}")
-    EnvLoader(env)
+    WebUiConfigLoader(env)

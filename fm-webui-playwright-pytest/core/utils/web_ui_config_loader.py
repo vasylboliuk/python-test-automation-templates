@@ -5,7 +5,7 @@ from core.config.model.webui_config_model import WebUiConfigDto
 from core.utils.file_util import FileUtil
 
 
-class EnvironmentSingleton(type):
+class LoaderSingleton(type):
     _instances = {}
 
     def __call__(cls, *args, **kwargs):
@@ -19,7 +19,7 @@ class EnvironmentSingleton(type):
         return cls._instances[cls]
 
 
-class EnvLoader(metaclass=EnvironmentSingleton):
+class WebUiConfigLoader(metaclass=LoaderSingleton):
 
     def __init__(self, env='qa'):
         self.env = env
@@ -30,10 +30,7 @@ class EnvLoader(metaclass=EnvironmentSingleton):
         config_path = os.path.join(CommonPaths.environment_path, self.env, config_file)
         return FileUtil.read_yaml_file(config_path)
 
-    def get_config(self):
-        return self._web_ui_config
-
-    def get_webui_config_value(self) -> WebUiConfigDto:
+    def get_config(self) -> WebUiConfigDto:
         return WebUiConfigDto.from_dict(self._web_ui_config)
 
     def get_env(self):
