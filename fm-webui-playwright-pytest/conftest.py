@@ -1,5 +1,5 @@
 from core.config.common_paths import CommonPaths
-from core.utils.web_ui_config_loader import WebUiConfigLoader
+from core.config.web_ui_config_loader import WebUiConfigLoader
 
 
 def pytest_runtest_setup(item):

@@ -2,7 +2,7 @@ from playwright.sync_api import Browser
 from playwright.sync_api import sync_playwright
 
 from core.config.model.webui_config_model import WebDriverConfigDto
-from core.utils.web_ui_config_loader import WebUiConfigLoader
+from core.config.web_ui_config_loader import WebUiConfigLoader
 
 
 class BrowserFactorySingleton(type):

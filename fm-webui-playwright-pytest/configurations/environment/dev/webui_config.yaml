@@ -1,7 +1,6 @@
 ---
 BaseURL: https://www.saucedemo.com/
 WebDriverConfig:
-  DefaultImplicitWait: 15
   DefaultExplicitWait: 120
   HeadlessMode: false
   WindowSize: '1920,1200'

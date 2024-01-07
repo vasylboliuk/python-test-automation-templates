@@ -1,4 +1,5 @@
-from core.webui.pages.BasePage import BasePage
+from core.webui.pages.base_page import BasePage
+from core.webui.pages.products_page import ProductsPage
 
 
 class LoginPage(BasePage):
@@ -18,6 +19,12 @@ class LoginPage(BasePage):
 
     def user_login_dtn(self):
         return self.page.locator('[data-test="login-button"]')
+
+    def error_msg(self):
+        return self.page.locator('[data-test="error"]').text_content(timeout=self.default_timeout)
+
+    def products_page(self):
+        return ProductsPage()
 
     def enter_user_name(self, user_name):
         self.user_name_field().click()
