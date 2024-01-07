@@ -1,6 +1,7 @@
-from playwright.sync_api import Page
+from playwright.sync_api import Browser
 from playwright.sync_api import sync_playwright
 
+from core.config.model.webui_config_model import WebDriverConfigDto
 from core.utils.web_ui_config_loader import WebUiConfigLoader
 
 
@@ -25,29 +26,28 @@ class BrowserFactory(metaclass=BrowserFactorySingleton):
     def __init__(self):
         self.web_ui_config = WebUiConfigLoader().get_config()
         self.browser_config = self.web_ui_config.web_driver_config
-        self.sync_playwright = sync_playwright().start()
         self.__browser = None
         self.__browser_context = None
         self.__browser_page = None
 
     def init_web_browser(self, browser_type: str):
         if browser_type == "Chrome":
-            self.__browser = self.sync_playwright.chromium.launch(headless=self.browser_config.headless_mode)
+            self.__browser = BrowserImpl().get_chrome_browser_imp()
             self.__browser_context = self.__browser.new_context()
             self.__browser_page = self.__browser.new_page()
         return self
 
-    def get_browser(self):
+    def get_browser(self) -> Browser:
         if self.__browser is None:
             raise ValueError(self._init_error)
         return self.__browser
 
-    def get_browser_contex(self):
+    def get_browser_context(self):
         if self.__browser_context is None:
             raise ValueError(self._init_error)
         return self.__browser_context
 
-    def get_browser_page(self) -> Page:
+    def get_browser_page(self):
         if self.__browser_page is None:
             raise ValueError(self._init_error)
         return self.__browser_page
@@ -56,3 +56,16 @@ class BrowserFactory(metaclass=BrowserFactorySingleton):
         self.__browser_context.close()
         self.__browser.close()
 
+
+class BrowserImpl:
+
+    def __init__(self, browser_config: WebDriverConfigDto = None):
+        self.browser_config = browser_config
+        self.default_headless = False
+        if self.browser_config is not None:
+            self.default_headless = self.browser_config.headless_mode
+        self.sync_playwright = sync_playwright().start()
+
+    def get_chrome_browser_imp(self) -> Browser:
+        browser = self.sync_playwright.chromium.launch(headless=self.default_headless)
+        return browser

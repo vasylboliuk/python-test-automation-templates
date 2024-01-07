@@ -1,5 +1,3 @@
-from playwright.sync_api import Page
-
 from core.webui.pages.BasePage import BasePage
 
 
